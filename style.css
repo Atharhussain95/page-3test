@@ -1,0 +1,664 @@
+@font-face {
+  font-family: "Athar";
+  src: url(fonts/Reiswar.ttf);
+}
+@font-face {
+  font-family: "Zoya";
+  src: url(fonts/Xthlx.otf);
+}
+@font-face {
+  font-family: "Huda";
+  src: url(fonts/as.ttf);
+}
+@font-face {
+  font-family: "Mahboob";
+  src: url(fonts/zero\ hour.otf);
+}
+@font-face {
+  font-family: "Punit";
+  src: url(fonts/Univox.otf);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+/* ::-webkit-scrollbar {
+  width: 6px;
+  
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 10px grey; 
+  border-radius: 10px;
+}
+ 
+
+::-webkit-scrollbar-thumb {
+  background: rgb(255, 73, 1); 
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0; 
+} */
+
+.loader {
+  background-color: #ffffff;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+.loader h2 span {
+  display: inline-block;
+  color: #000000;
+  font-weight: lighter;
+  font-family: "Mahboob";
+}
+
+.reveal .parent {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow-y: hidden;
+}
+
+.reveal .parent .child {
+  display: block;
+}
+
+.parent .child span {
+  display: inline-block;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.container .home-img video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.919), transparent);
+}
+
+#nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5vw;
+  width: 100%;
+  height: 100px;
+}
+
+#nav a {
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 15px;
+  font-family: "Athar";
+  color: rgb(255, 255, 255);
+  z-index: 2;
+}
+
+#nav a:hover {
+  color: rgb(188, 187, 187);
+}
+#nav a:hover::after {
+  width: 100%;
+}
+
+.row {
+  top: 22vw;
+  position: relative;
+  display: flex;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  color: rgb(255, 255, 255);
+  padding: 0 4.5vw;
+  line-height: 1.2;
+  padding-right: 12vw;
+  z-index: 3;
+}
+
+.row h1 {
+  position: absolute;
+  bottom: 20px;
+  left: 4%;
+  font-size: 10vw;
+  font-weight: 300;
+  font-family: "Huda";
+}
+
+.row .text {
+  margin-top: 20vw;
+}
+
+.row h5 {
+  font-size: 11px;
+  opacity: 0.6;
+  font-weight: 500;
+}
+
+.row:nth-child(3) {
+  margin-top: 0;
+}
+
+.text .reveal {
+  color: #ffffff;
+  font-size: 15px;
+  font-family: "Athar";
+}
+.non-vis {
+  position: relative;
+  z-index: 2;
+}
+
+.header__button {
+  z-index: 200;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 5px solid rgb(255, 55, 0);
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  right: 30px;
+  margin: 20px;
+  outline: none;
+  animation-duration: 300ms;
+  animation-timing-function: ease;
+}
+
+.header__button[data-open="true"] {
+  background-color: transparent;
+  animation-name: scale;
+  border: 5px solid rgb(255, 77, 0);
+}
+
+.header__button[data-open="false"] {
+  transition: background-color 250ms linear;
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(100%);
+  }
+}
+
+.header__nav {
+  background: rgb(255, 255, 255);
+  position: fixed;
+  overflow: hidden;
+  z-index: 99;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 50px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  visibility: hidden;
+  clip-path: circle(var(--radius) at calc(100% - 55px) 47px);
+}
+
+.header__nav[data-active="true"] {
+  visibility: visible;
+}
+
+.header__menu {
+  padding: 0;
+  margin: 0;
+}
+
+.header__menu > .header__menu-item {
+  font-size: 12vh;
+}
+
+.header__menu > .header__menu-item:not(:last-of-type) {
+  margin-bottom: 0em;
+}
+
+.header__menu-item a {
+  letter-spacing: 1px;
+  font-weight: 100;
+  color: #858484;
+  font-family: "Athar";
+  text-decoration: none;
+  transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.header__menu-item a:hover {
+  color: #000000;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #000000; /* Add the border-bottom on hover */
+}
+/*------------------music css---------------*/
+.soundbutton {
+  position: fixed;
+  bottom: 5vh;
+  right: 5vw;
+  cursor: pointer;
+  width: 30px;
+  transition: 0.25s ease;
+  z-index: 99;
+}
+.soundbutton.paused {
+  opacity: 0.25;
+}
+/*-----------------music css------------------*/
+
+.page2 {
+  height: 100vh;
+  width: 100vw;
+  background-color: #000000;
+  position: relative;
+  overflow: hidden;
+}
+
+.left-heading,
+.date {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s, transform 0.5s;
+  position: absolute;
+  top: 40px;
+  font-size: 18px;
+  color: #6b6b6b;
+  font-family: "Athar";
+}
+
+.left-heading {
+  left: 35px;
+}
+
+.date {
+  right: 35px;
+}
+
+.left-heading span {
+  font-family: "mahboob";
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+}
+
+/* ========================================section2=================== */
+
+.section2 {
+  height: 100vh;
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section2 .five {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.section2 .five .left,
+.section2 .five .right {
+  height: 100%;
+  width: 100%;
+  margin-left: 100px;
+}
+
+.section2 .five .right img {
+  height: 90%;
+  width: 90%;
+  border-radius: 20px;
+  filter: grayscale(100%);
+  transition: filter 0.3s;
+}
+
+.section2 .five .right img:hover {
+  filter: grayscale(0%);
+}
+
+.section2 .five .left .one {
+  overflow: hidden;
+  margin: 50px 0;
+}
+
+.section2 .five .left h1 {
+  font-size: 2.2vw;
+  color: #ffffff;
+  font-family: "Athar";
+  font-weight: 100;
+}
+
+.left h5 {
+  font-size: 10px;
+  color: #ffffff;
+  font-family: "Punit";
+}
+
+.page33{
+  height: 100vh;
+}
+.page3 .section4 {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.section4 {
+  min-height: 100vh;
+  height: 100%;
+  padding: 20px 0;
+}
+
+.section4 .services {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.section4 .services:hover {
+  background-color: #00000026;
+}
+
+.section4 .services:hover h5 {
+  color: rgb(0, 0, 0);
+}
+
+.section4 .four .moving-text .text {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  margin: 50px 0;
+}
+
+.section4 .four .moving-text .text .first {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  animation: move linear infinite 15s;
+}
+
+.section4 .four .moving-text .text .first video {
+  height: 150px;
+  width: 150px;
+  margin: 0 50px;
+}
+
+.section4 .four .moving-text .text .first h1 {
+  font-size: 6vw;
+  text-transform: uppercase;
+  font-family: "Huda";
+}
+
+@keyframes move {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+#page4 {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: #000000;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+  .row {
+    top: 80vw;
+    gap: 10px;
+  }
+
+  .row h1 {
+    left: 6%;
+    font-size: 16vw;
+    font-weight: 300;
+    bottom: 40px;
+  }
+  #nav a {
+    font-size: 20px;
+  }
+  .row .text {
+    margin-top: 45vw;
+  }
+  .text .reveal {
+    font-size: 12px;
+  }
+  #nav a,
+  .header__button {
+    top: 5px;
+    right: 0px;
+  }
+
+  .header__menu-item a {
+    letter-spacing: 3px;
+    font-weight: 100 !important;
+    color: #9b9999;
+    font-size: 40px;
+  }
+  .soundbutton {
+    bottom: 8vh;
+    right: 8vw;
+    width: 40px;
+  }
+  .header__nav {
+    background: rgb(253, 251, 251);
+  }
+
+  .header__menu-item a:hover {
+    color: #000000;
+    border-bottom: 2px solid #000000; /* Add the border-bottom on hover */
+  }
+
+  .loader {
+    background-color: #ffffff;
+  }
+  .loader h2 span {
+    color: #000000;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .left-heading span {
+    font-size: 10px;
+  }
+
+  .left-heading,
+  .date {
+    font-size: 20px;
+  }
+
+  /*-------section 2-----------*/
+  .section2 .five {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0px;
+  }
+
+  .section2 .five .left,
+  .section2 .five .right {
+    height: 100%;
+    width: 100%;
+    margin-left: 25px;
+  }
+
+  .section2 .five .left .one {
+    overflow: hidden;
+    margin: 40px 0;
+  }
+
+  .section2 .five .left h1 {
+    font-size: 5.2vw;
+  }
+
+  .left h5 {
+    font-size: 12px;
+  }
+
+
+
+
+
+  /*------------section2------*/
+
+  .page33{
+    height: 60vh;
+  }
+
+
+.section4 .services {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.section4 .four .moving-text .text .first h1 {
+  font-size: 15vw;
+  text-transform: uppercase;
+  font-family: "Huda";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
